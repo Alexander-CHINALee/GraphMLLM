@@ -98,20 +98,23 @@ class XFUN(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
-        file_dir = 'xfund&funsd/'
-        train_files_for_many_langs = [[file_dir+f"{self.config.lang}.train.json", file_dir+f"{self.config.lang}"]]
-        val_files_for_many_langs = [[file_dir+f"{self.config.lang}.val.json", file_dir+f"{self.config.lang}"]]
-
+        urls_to_download = {
+            "train": [f"{_URL}{self.config.lang}.train.json", f"{_URL}{self.config.lang}.train.zip"],
+            "val": [f"{_URL}{self.config.lang}.val.json", f"{_URL}{self.config.lang}.val.zip"],
+            # "test": [f"{_URL}{self.config.lang}.test.json", f"{_URL}{self.config.lang}.test.zip"],
+        }
+        downloaded_files = dl_manager.download_and_extract(urls_to_download)
+        train_files_for_many_langs = [downloaded_files["train"]]
+        val_files_for_many_langs = [downloaded_files["val"]]
+        # test_files_for_many_langs = [downloaded_files["test"]]
         if self.config.additional_langs:
             additional_langs = self.config.additional_langs.split("+")
             if "all" in additional_langs:
                 additional_langs = [lang for lang in _LANG if lang != self.config.lang]
             for lang in additional_langs:
-                # urls_to_download = {"train": [f"{_URL}{lang}.train.json", f"{_URL}{lang}.train.zip"]}
-                # additional_downloaded_files = dl_manager.download_and_extract(urls_to_download)
-                # train_files_for_many_langs.append(additional_downloaded_files["train"])
-                train_files_for_many_langs.append([file_dir+f"{lang}.train.json", file_dir+f"{lang}"])
-
+                urls_to_download = {"train": [f"{_URL}{lang}.train.json", f"{_URL}{lang}.train.zip"]}
+                additional_downloaded_files = dl_manager.download_and_extract(urls_to_download)
+                train_files_for_many_langs.append(additional_downloaded_files["train"])
 
         logger.info(f"Training on {self.config.lang} with additional langs({self.config.additional_langs})")
         logger.info(f"Evaluating on {self.config.lang}")
@@ -125,7 +128,6 @@ class XFUN(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepaths):
-        vis_idx =0
         for filepath in filepaths:
             logger.info("Generating examples from = %s", filepath)
             with open(filepath[0], "r") as f:
