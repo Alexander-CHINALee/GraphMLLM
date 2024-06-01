@@ -5,7 +5,7 @@ This is the official PyTorch implementation of the ICDAR 2024 paper: "GraphMLLM:
 <img src="./figs/framework.png" alt="framework"/>
 
 ## Installation
-~~bash
+```
 conda create -n gmllm python=3.9
 conda activate gmllm
 conda install pytorch==1.12.1 torchvision==0.13.1 
@@ -14,7 +14,7 @@ git clone https://github.com/HSDai/GraphMLLM
 cd GraphMLLM
 pip install -r requirements.txt
 pip install -e .
-~~
+```
 
 ## Datasets
 
@@ -110,4 +110,4 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 
 ## Acknowledge
 
-The repository benefits greatly from [lilt](https://github.com/jpWang/LiLT). Thanks a lot for their excellent work.
+The repository benefits greatly from [LiLT](https://github.com/jpWang/LiLT). Thanks a lot for their excellent work.
