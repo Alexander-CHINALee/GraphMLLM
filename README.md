@@ -1,6 +1,6 @@
 # GraphMLLM
 
-This is the official PyTorch implementation of the ICDAR 2024 paper: "GraphMLLM: A Graph-based Multi-level Layout Language-independent Model for Document Understanding"
+This is the official PyTorch implementation of paper: "GraphMLLM: A Graph-based Multi-level Layout Language-independent Model for Document Understanding"
 
 <img src="./figs/framework.png" alt="framework"/>
 
