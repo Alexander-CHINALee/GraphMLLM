@@ -8,8 +8,7 @@ This is the official PyTorch implementation of paper: "GraphMLLM: A Graph-based 
 ```
 conda create -n gmllm python=3.9
 conda activate gmllm
-conda install pytorch==1.12.1 torchvision==0.13.1 
-cudatoolkit=11.3 -c pytorch
+conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
 git clone https://github.com/HSDai/GraphMLLM
 cd GraphMLLM
 pip install -r requirements.txt
