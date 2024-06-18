@@ -32,7 +32,7 @@ If you want to combine the pre-trained GraphMLLM with **other language's *RoBERT
 ```
 CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 examples/run_funsd.py \
         --model_name_or_path gmllm-roberta-en-base \
-        --tokenizer_name roberta-base \
+        --tokenizer_name roberta-en-base \
         --output_dir ser_funsd_gmllm-roberta-en-base \
         --do_train \
         --do_predict \
